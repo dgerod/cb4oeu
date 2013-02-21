@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block subtitle %}
+  {% trans %} Calendar {% endtrans %}
+{% endblock subtitle %}
+
+{% block top_content %}
+
+  <div>
+    <div class="gcb-aux">
+      <div class="gcb-cols">
+        <div class="gcb-col-6">
+          <br>
+          <iframe src="{{course_info.course.calendar_embed_url}}" 
+            style="border: 0" 
+            width="800" height="600" 
+            frameborder="0" 
+            scrolling="no">
+          </iframe>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block main_content %}
+
+{% endblock %}
