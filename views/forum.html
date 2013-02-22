@@ -1,17 +1,39 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="1;url=https://plus.google.com/u/0/communities/110493022769407924841">
-    <script language="javascript">
-        window.location.href = "https://plus.google.com/u/0/communities/110493022769407924841"
-    </script>
-    <title>Page Redirection</title>
-</head>
-<body>
-<!-- Note: don't tell people to `click` the link, just tell them that it is a link -->
-If you are not redirected automatically, follow the <a href='https://plus.google.com/u/0/communities/110493022769407924841'>link</a>
-</body>
-</html>
+{% extends 'base.html' %}
 
+{% block subtitle %}
+  {% trans %} Forum {% endtrans %}
+{% endblock subtitle %}
 
+{% block top_content %}
+
+  <div>
+    <div class="gcb-aux">
+      <div class="gcb-cols">
+        <div class="gcb-col-6">
+          <iframe id="forum_embed"
+            src="javascript:void(0)"
+            scrolling="no"
+            title="Forum"
+            frameborder="0"
+            width="900"
+            height="700">
+          </iframe>
+
+          {% if course_info.course.forum_embed_url %}
+            <script type="text/javascript">
+              document.getElementById("forum_embed").src =
+              "{{course_info.course.forum_embed_url}}"
+              + "&showsearch=true&showpopout=true&showtabs=false"
+              + "&parenturl=" + encodeURIComponent(window.location.href);
+            </script>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block main_content %}
+
+{% endblock %}

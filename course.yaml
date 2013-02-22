@@ -61,17 +61,16 @@ course:
   #
   #     http://code.google.com/p/course-builder/wiki/WebForums.
   
-  #forum_url: //groups.google.com/group/My-Course
+  forum_url: //groups.google.com/group/My-Course
   
   community_on: True
-  forum_url: https://plus.google.com/u/0/communities/110493022769407924841
+  community_url: https://plus.google.com/u/0/communities/110493022769407924841
 
   # Forum embedding URL. This link is used to embed the forum in an iframe on
   # the forum.html page. Set this value to False if you don't use forum and/or
   # to remove the Forum link from the student navigation bar.
 
-  #forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
-  forum_embed_url: https://plus.google.com/u/0/communities/110493022769407924841
+  forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
   
   # Enable/disable the wiki page.
   wiki_on: True

@@ -30,7 +30,6 @@ from models.utils import get_all_scores
 import webapp2
 from google.appengine.api import users
 
-
 # The name of the template dict key that stores a course's base location.
 COURSE_BASE_KEY = 'gcb_course_base'
 
@@ -330,10 +329,22 @@ class ForumHandler(BaseHandler):
         """Handles GET requests."""
         if not self.personalize_page_and_get_enrolled():
             return
-
+        
+        # Activate forum on navigation bar
         self.template_value['navbar'] = {'forum': True}
-        self.render('forum.html')
-
+        
+        # Depending on type use forum or G+ community
+        
+        #self.app_context.get_environ()        
+        #COURSE_INFO_KEY
+        #print course_info.course.community_url
+        
+        use_community = True
+                
+        if use_community is True:
+            self.render('community.html')
+        else:
+            self.render('forum.html')
 
 class StudentProfileHandler(BaseHandler):
     """Handles the click to 'My Profile' link in the nav bar."""
