@@ -60,9 +60,10 @@ course:
   # Calendar embedding URL ---
   
   # Enable/disable the calendar page
-  # Set this value to False if you don't use calendar and/or to remove 
+  # Set this value to False if you don't use calendar and to remove 
   # the Calendar link from the student navigation bar.
   calendar_on: True  
+  
   # Google calendar embedded link
   calendar_embed_url: https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=en&amp;bgcolor=%23FFFFFF&amp;src=c2jvev72r3coiboc53j2k9b8vg%40group.calendar.google.com&amp;color=%23125A12&amp;ctz=Europe%2FMadrid
 
@@ -72,26 +73,28 @@ course:
 
   # Enable/disable the forum page
   # Set this value to False if you don't use forum and/or to remove 
-  # the Calendar link from the student navigation bar.  
+  # the Forum link from the student navigation bar.  
   forum_on: True
-  
-  # Forum URL. The forum is not embedded in forum page.      
+
+  # Select embedded forum or external one
+  # If true the forum is open in an external page.
+  use_external_forum: True
+    
+  # Forum URL. 
+  # The forum is not embedded in forum page, it is open in external page
   #forum_url: //groups.google.com/group/My-Course
   forum_url: https://plus.google.com/u/0/communities/110493022769407924841
 
-  # Select normal forum or G+ community as course forum
-  # If true community_url is used instead of forum_url/forum_embed_url
-  use_external_forum: True
-
-  # Forum embedding URL. This link is used to embed the forum in an iframe on
-  # the forum.html page.   
+  # Forum embedding URL. 
+  # This link is used to embed the forum in an iframe on the forum.html page.   
   #forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
   forum_embed_url: http://groups.google.com/forum/embed/?place=forum/course-builder-forum
   
   # Wiki ---
   
   # Enable/disable the wiki page
-  # If it is false the page is not on the navigation bar
+  # Set this value to False if you don't use wiki and/or to remove 
+  # the Wiki link from the student navigation bar.
   wiki_on: True
 
   # Announcements ---
