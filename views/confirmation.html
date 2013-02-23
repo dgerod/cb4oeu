@@ -22,7 +22,7 @@
 
         <div style="text-align:left;">
           <ul>
-            {% if course_info.course.forum_url %}
+            {% if course_info.course.forum_on == True %}
               <li>
                 {% trans %} To participate in community discussions about this course, register for the web forum at {% endtrans %}
                 <a href="{{course_info.course.forum_url}}">

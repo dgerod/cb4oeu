@@ -339,10 +339,10 @@ class ForumHandler(BaseHandler):
         # Depending on type use forum or G+ community
         
         environ = self.app_context.get_environ()
-        use_community = environ['course']['use_community_as_forum']
-        logging.error( "Use community: " + str(use_community) )
+        use_external_forum = environ['course']['use_external_forum']
+        logging.error( "External forum: " + str(use_external_forum) )
         
-        if use_community is True:
+        if use_external_forum is True:
             self.render('community.html')
         else:
             self.render('forum.html')

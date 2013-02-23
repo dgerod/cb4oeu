@@ -48,7 +48,7 @@ course:
     #url: //www.youtube.com/embed/b27PBnyVtmU
   main_image:
     url: /assets/img/banner.png
-    alt_text: 'Some robots'
+    alt_text: 'Some nice robots'
 
   # Course start date.
   start_date: 'February 05, 2013'
@@ -75,22 +75,18 @@ course:
   # the Calendar link from the student navigation bar.  
   forum_on: True
   
+  # Forum URL. The forum is not embedded in forum page.      
+  #forum_url: //groups.google.com/group/My-Course
+  forum_url: https://plus.google.com/u/0/communities/110493022769407924841
+
   # Select normal forum or G+ community as course forum
   # If true community_url is used instead of forum_url/forum_embed_url
-  use_community_as_forum: True
-  
-  # Forum URL  
-  #forum_url: //groups.google.com/group/My-Course
-  forum_url: https://groups.google.com/forum/#!forum/course-builder-forum
-  
+  use_external_forum: True
+
   # Forum embedding URL. This link is used to embed the forum in an iframe on
   # the forum.html page.   
   #forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
   forum_embed_url: http://groups.google.com/forum/embed/?place=forum/course-builder-forum
-  
-  # Community URL. The community is not embedded in forum page.    
-  #community_url: https://plus.google.com/u/0/communities/xxxxxxxxxxxxxxxxxxxxx
-  community_url: https://plus.google.com/u/0/communities/110493022769407924841
   
   # Wiki ---
   
