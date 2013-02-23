@@ -31,6 +31,7 @@ import modules.announcements.samples as samples
 from modules.oeditor import oeditor
 from google.appengine.ext import db
 
+import markdown
 
 # TODO(psimakov): we should really use an ordered dictionary, not plain text; it
 # can't be just a normal dict because a dict iterates its items in undefined
@@ -47,6 +48,7 @@ SCHEMA_JSON = """
             "key" : {"type": "string"},
             "title": {"optional": true, "type": "string"},
             "date": {"optional": true, "type": "date"},
+            "is_html": {"type": "boolean"},
             "html": {"optional": true, "type": "text"},
             "is_draft": {"type": "boolean"}
             }
@@ -60,10 +62,14 @@ SCHEMA_ANNOTATIONS_DICT = [
     (['title'], 'Announcement'),
     (['properties', 'key', '_inputex'], {
         'label': 'ID', '_type': 'uneditable'}),
+    (['properties', 'title', '_inputex'], {'label': 'Title'}),
     (['properties', 'date', '_inputex'], {
         'label': 'Date', '_type': 'date', 'dateFormat': 'Y/m/d',
         'valueFormat': 'Y/m/d'}),
-    (['properties', 'title', '_inputex'], {'label': 'Title'}),
+
+    oeditor.create_bool_select_annotation(
+        ['properties', 'is_html'], 'Type', 'Html', 'WikiText'),
+
     (['properties', 'html', '_inputex'], {'label': 'Body', '_type': 'text'}),
     oeditor.create_bool_select_annotation(
         ['properties', 'is_draft'], 'Status', 'Draft', 'Published')]
@@ -168,6 +174,12 @@ class AnnouncementsHandler(BaseHandler, ReflectiveRequestHandler):
 
         items = AnnouncementsRights.apply_rights(self, items)
 
+        # Text could be HTML or wiki text (markdown syntax). 
+        # Transform to HTML if it is wiki text.
+        for item in items:
+            if item.is_html == False:
+                item.html =  markdown.markdown(item.html)
+            
         self.template_value['announcements'] = self.format_items_for_template(
             items)
         self.template_value['navbar'] = {'announcements': True}
@@ -212,6 +224,7 @@ class AnnouncementsHandler(BaseHandler, ReflectiveRequestHandler):
         entity = AnnouncementEntity()
         entity.title = 'Sample Announcement'
         entity.date = datetime.datetime.now().date()
+        entity.is_html = True
         entity.html = 'Here is my announcement!'
         entity.is_draft = True
         entity.put()
@@ -282,6 +295,7 @@ class AnnouncementEntity(entities.BaseEntity):
     """A class that represents a persistent database entity of announcement."""
     title = db.StringProperty(indexed=False)
     date = db.DateProperty()
+    is_html = db.BooleanProperty()
     html = db.TextProperty(indexed=False)
     is_draft = db.BooleanProperty()
 
@@ -309,3 +323,4 @@ class AnnouncementEntity(entities.BaseEntity):
         """Do the normal delete() and invalidate memcache."""
         super(AnnouncementEntity, self).delete()
         MemcacheManager.delete(self.memcache_key)
+

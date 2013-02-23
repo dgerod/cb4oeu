@@ -20,7 +20,6 @@ import datetime
 
 SAMPLE_WIKI_ENTRY_1 = {
     'edit_url': None,
-    'date': datetime.date(2012, 10, 6),
     'is_draft': False,
     'html': """
         <br>Certificates will be e-mailed to qualifying participants by
@@ -32,7 +31,6 @@ SAMPLE_WIKI_ENTRY_1 = {
 
 SAMPLE_WIKI_ENTRY_2 = {
     'edit_url': None,
-    'date': datetime.date(2012, 10, 5),
     'is_draft': True,
     'html': """
         <br>Welcome to the final class! <a href="class?class=6"> Class 6</a>
@@ -70,3 +68,4 @@ SAMPLE_WIKI_ENTRY_2 = {
         """}
 
 SAMPLE_WIKI_ENTRIES = [SAMPLE_WIKI_ENTRY_1, SAMPLE_WIKI_ENTRY_2]
+

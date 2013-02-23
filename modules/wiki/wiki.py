@@ -47,7 +47,7 @@ SCHEMA_JSON = """
         "properties": {
             "key" : {"type": "string"},
             "position": {"type": "integer"},            
-            "date": {"optional": true, "type": "date"},
+
             "is_html": {"type": "boolean"},
             "html": {"optional": true, "type": "text"},
             "is_draft": {"type": "boolean"}
@@ -66,9 +66,6 @@ SCHEMA_ANNOTATIONS_DICT = [
         'label': 'Position', '_type': 'integer', 'min': 1}),
     oeditor.create_bool_select_annotation(
         ['properties', 'is_html'], 'Type', 'Html', 'WikiText'),
-    (['properties', 'date', '_inputex'], {    
-        'label': 'Date', '_type': 'date', 'dateFormat': 'Y/m/d',
-        'valueFormat': 'Y/m/d'}),
     (['properties', 'html', '_inputex'], {'label': 'Body', '_type': 'text'}),    
     oeditor.create_bool_select_annotation(
         ['properties', 'is_draft'], 'Status', 'Draft', 'Published')]
@@ -221,9 +218,7 @@ class WikiHandler(BaseHandler, ReflectiveRequestHandler):
             return
 
         entity = WikiEntity()
-        entity.title = 'Sample entry'
         entity.position = 1
-        entity.date = datetime.datetime.now().date()
         entity.is_html = True
         entity.html = 'Here is my wiki entry!'
         entity.is_draft = True
@@ -295,7 +290,6 @@ class WikiEntity(entities.BaseEntity):
     """A class that represents a persistent database entity of wiki."""
     title = db.StringProperty(indexed=False)
     position = db.IntegerProperty()
-    date = db.DateProperty()   
     is_html = db.BooleanProperty()
     html = db.TextProperty(indexed=False)
     is_draft = db.BooleanProperty()
@@ -324,3 +318,4 @@ class WikiEntity(entities.BaseEntity):
         """Do the normal delete() and invalidate memcache."""
         super(WikiEntity, self).delete()
         MemcacheManager.delete(self.memcache_key)
+
