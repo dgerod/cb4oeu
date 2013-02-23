@@ -28,7 +28,9 @@ course:
   # exact match only.
   admin_user_emails: ''
 
-  # Course title
+  # General configuration: title, instructor and so on ---
+  
+  # Course title in main page
   title: 'COURSE TITLE'
 
   # Main page blurb. (The '|' at the beginning enables multi-line input.)
@@ -46,35 +48,58 @@ course:
     #url: //www.youtube.com/embed/b27PBnyVtmU
   main_image:
     url: /assets/img/banner.png
-    alt_text: BANNER_TEXT
+    alt_text: 'Some robots'
 
   # Course start date.
   start_date: 'February 05, 2013'
 
+  # TODO-FIX - dgerod: This is an ongoing feature.
   # Enable/disable references in course page.
   references_in_course: False
 
-  # Calendar embedding URL.
+  # Calendar embedding URL ---
+  
+  # Enable/disable the calendar page
+  # Set this value to False if you don't use calendar and/or to remove 
+  # the Calendar link from the student navigation bar.
+  calendar_on: True  
+  # Google calendar embedded link
   calendar_embed_url: https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=en&amp;bgcolor=%23FFFFFF&amp;src=c2jvev72r3coiboc53j2k9b8vg%40group.calendar.google.com&amp;color=%23125A12&amp;ctz=Europe%2FMadrid
 
-  # Forum URL. For details, see
-  #
-  #     http://code.google.com/p/course-builder/wiki/WebForums.
-  
-  forum_url: //groups.google.com/group/My-Course
-  
-  community_on: True
-  community_url: https://plus.google.com/u/0/communities/110493022769407924841
+  # Forum page ----
+  # For details, see: 
+  #      http://code.google.com/p/course-builder/wiki/WebForums.
 
+  # Enable/disable the forum page
+  # Set this value to False if you don't use forum and/or to remove 
+  # the Calendar link from the student navigation bar.  
+  forum_on: True
+  
+  # Select normal forum or G+ community as course forum
+  # If true community_url is used instead of forum_url/forum_embed_url
+  use_community_as_forum: True
+  
+  # Forum URL  
+  #forum_url: //groups.google.com/group/My-Course
+  forum_url: https://groups.google.com/forum/#!forum/course-builder-forum
+  
   # Forum embedding URL. This link is used to embed the forum in an iframe on
-  # the forum.html page. Set this value to False if you don't use forum and/or
-  # to remove the Forum link from the student navigation bar.
-
-  forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
+  # the forum.html page.   
+  #forum_embed_url: //groups.google.com/forum/embed/?place=forum/My-Course
+  forum_embed_url: http://groups.google.com/forum/embed/?place=forum/course-builder-forum
   
-  # Enable/disable the wiki page.
+  # Community URL. The community is not embedded in forum page.    
+  #community_url: https://plus.google.com/u/0/communities/xxxxxxxxxxxxxxxxxxxxx
+  community_url: https://plus.google.com/u/0/communities/110493022769407924841
+  
+  # Wiki ---
+  
+  # Enable/disable the wiki page
+  # If it is false the page is not on the navigation bar
   wiki_on: True
 
+  # Announcements ---
+  
   # URL for the mailing list where students can register to receive course
   # announcements. For details, see
   #

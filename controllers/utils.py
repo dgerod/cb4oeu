@@ -30,6 +30,8 @@ from models.utils import get_all_scores
 import webapp2
 from google.appengine.api import users
 
+import logging
+
 # The name of the template dict key that stores a course's base location.
 COURSE_BASE_KEY = 'gcb_course_base'
 
@@ -132,6 +134,7 @@ class ApplicationHandler(webapp2.RequestHandler):
         super(ApplicationHandler, self).__init__(*args, **kwargs)
         self.template_value = {}
 
+    # TODO-REVIEW - dgerod: How to get configuration parameters?
     def get_template(self, template_file, additional_dirs=None):
         """Computes location of template files for the current namespace."""
         self.template_value[COURSE_INFO_KEY] = self.app_context.get_environ()
@@ -335,12 +338,10 @@ class ForumHandler(BaseHandler):
         
         # Depending on type use forum or G+ community
         
-        #self.app_context.get_environ()        
-        #COURSE_INFO_KEY
-        #print course_info.course.community_url
+        environ = self.app_context.get_environ()
+        use_community = environ['course']['use_community_as_forum']
+        logging.error( "Use community: " + str(use_community) )
         
-        use_community = True
-                
         if use_community is True:
             self.render('community.html')
         else:

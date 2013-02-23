@@ -111,14 +111,14 @@
               {% trans %} Course {% endtrans %}
             </a>
           </li>
-          {% if course_info.course.calendar_embed_url %}
+          {% if course_info.course.calendar_on == True %}
           <li {% if navbar.calenar %}class='active'{% endif %}>
             <a href="calendar">
               {% trans %} Calendar {% endtrans %}
             </a>
           </li>
           {% endif %}          
-          {% if course_info.course.forum_embed_url %}
+          {% if course_info.course.forum_on == True %}
           <li {% if navbar.forum %}class='active'{% endif %}>
             <a href="forum">
               {% trans %} Forum {% endtrans %}
