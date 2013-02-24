@@ -36,7 +36,6 @@ class Course(object):
         self._loaded = False
         self._units = []
         self._lessons = []
-        self._references = []
         self._unit_id_to_lessons = {}
 
     def _reindex(self):
@@ -54,7 +53,6 @@ class Course(object):
             if envelope:
                 self._units = envelope.units
                 self._lessons = envelope.lessons
-                self._references = envelope.references
                 self._reindex()
 
                 self._loaded = True
@@ -68,12 +66,11 @@ class Course(object):
         envelope = SerializableCourseEnvelope()
         envelope.units = self._units
         envelope.lessons = self._lessons
-        envelope.references = self._references
         MemcacheManager.set(self.memcache_key, envelope)
 
     def _rebuild_from_source(self):
         """Loads course data from persistence storage into this instance."""
-        self._units, self._lessons, self._references = load_csv_course(self._app_context)
+        self._units, self._lessons = load_csv_course(self._app_context)
         self._reindex()
         self._loaded = True
 
@@ -94,9 +91,6 @@ class Course(object):
         self._materialize()
         return self._unit_id_to_lessons[str(unit_id)]
         
-    def get_references(self):
-        self._materialize()
-        return self._references
 
 class SerializableCourseEnvelope(object):
     """A serializable, data-only representation of a Course."""
@@ -133,16 +127,6 @@ class Lesson(object):
         self.activity_title = ''
 
 
-class Reference(object):
-    """An object to represent an entry of the bibliography."""
-
-    def __init__(self):
-        self.id = 0
-        self.ref_id = ''
-        self.title = ''
-        self.link = ''
-
-
 def copy_attributes(source, target, converter):
     """Copies source object attributes into a target using a converter."""
     for source_name, value in converter.items():
@@ -166,8 +150,6 @@ def load_csv_course(app_context):
         app_context.fs.open(unit_file), verify.UNITS_HEADER, verify.Unit)
     lessons = verify.read_objects_from_csv_stream(
         app_context.fs.open(lesson_file), verify.LESSONS_HEADER, verify.Lesson)
-    references = verify.read_objects_from_csv_stream(
-        app_context.fs.open(biblio_file), verify.BIBLIO_HEADER, verify.Reference)
     
     verifier = verify.Verifier()
     verifier.verify_unit_fields(units)
@@ -179,13 +161,10 @@ def load_csv_course(app_context):
     # Load data from CSV files into a datastore.
     new_units = []
     new_lessons = []
-    new_references = []
     units = verify.read_objects_from_csv_stream(
         app_context.fs.open(unit_file), verify.UNITS_HEADER, Unit)
     lessons = verify.read_objects_from_csv_stream(
         app_context.fs.open(lesson_file), verify.LESSONS_HEADER, Lesson)
-    references = verify.read_objects_from_csv_stream(
-        app_context.fs.open(biblio_file), verify.BIBLIO_HEADER, Reference)
     
     for unit in units:
         entity = Unit()
@@ -195,9 +174,5 @@ def load_csv_course(app_context):
         entity = Lesson()
         copy_attributes(lesson, entity, verify.LESSON_CSV_TO_DB_CONVERTER)
         new_lessons.append(entity)
-    for reference in references:
-        entity = Reference()
-        copy_attributes(reference, entity, verify.BIBLIO_CSV_TO_DB_CONVERTER)
-        new_references.append(entity)
     
-    return new_units, new_lessons, new_references
+    return new_units, new_lessons

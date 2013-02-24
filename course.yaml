@@ -53,10 +53,6 @@ course:
   # Course start date.
   start_date: 'February 05, 2013'
 
-  # TODO-FIX - dgerod: This is an ongoing feature.
-  # Enable/disable references in course page.
-  references_in_course: False
-
   # Calendar embedding URL ---
   
   # Enable/disable the calendar page

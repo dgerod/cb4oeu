@@ -80,7 +80,6 @@ class CourseHandler(BaseHandler):
             return
 
         self.template_value['units'] = self.get_units()
-        self.template_value['references'] = self.get_references()
         
         self.template_value['navbar'] = {'course': True}
         self.render('course.html')

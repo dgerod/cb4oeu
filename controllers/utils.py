@@ -134,7 +134,6 @@ class ApplicationHandler(webapp2.RequestHandler):
         super(ApplicationHandler, self).__init__(*args, **kwargs)
         self.template_value = {}
 
-    # TODO-REVIEW - dgerod: How to get configuration parameters?
     def get_template(self, template_file, additional_dirs=None):
         """Computes location of template files for the current namespace."""
         self.template_value[COURSE_INFO_KEY] = self.app_context.get_environ()
@@ -336,7 +335,7 @@ class ForumHandler(BaseHandler):
         # Activate forum on navigation bar
         self.template_value['navbar'] = {'forum': True}
         
-        # Depending on type use forum or G+ community
+        # Use forum embedded or external
         
         environ = self.app_context.get_environ()
         use_external_forum = environ['course']['use_external_forum']
