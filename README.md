@@ -12,4 +12,4 @@ Releases:
 
 For more information, see the documentation at https://code.google.com/p/course-builder/wiki/CourseBuilderChecklist.
 
-This was automatically exported from [Google Code](https://code.google.com/p/cb4oru)
+This was automatically exported from [Google Code](https://code.google.com/p/cb4oru).
